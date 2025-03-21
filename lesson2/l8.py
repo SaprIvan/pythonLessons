@@ -1,8 +1,10 @@
 # Место для вашей реализации
 message = input()
 
+dashes = '+' + '-' * (len(message) + 2) + '+'
 
-format_message = ''
+format_message = f"{dashes}\n| {message} |\n{dashes}"
+
 
 if __name__ == '__main__':
     # не обращайте на это внимание, это тесты
