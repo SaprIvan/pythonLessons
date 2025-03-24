@@ -24,3 +24,4 @@ if __name__ == '__main__':
 
     # вывод в терминал результата
     print(format_message)
+    print('')
