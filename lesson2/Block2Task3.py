@@ -11,13 +11,12 @@ def check_ships_count(ships_count):
         return "Корабль"
     else: return "Корабля"
 
-
 title = f'[Массовая рассылка] Уважаемый игрок Мира кораблей, {player_name}! '
 body = f'''Спасибо, что любите и играете в нашу игру. \
-       \nМы заметили, что у вас всего {player_ships_count} {check_ships_count(player_ships_count)}. 
-        \nПоэтому, мы дарим вам подарок: {reward_ships_count} {check_ships_count(reward_ships_count)}!'''
+       \nМы заметили, что у вас всего {player_ships_count} {check_ships_count(int(player_ships_count))}.
+        \nПоэтому, мы дарим вам подарок: {reward_ships_count} {check_ships_count(int(reward_ships_count))}! '''
 
-total = title + body + 'Ваш промокод: {<вставь промокод>}'
+total = title + body + f'Ваш промокод: {player_name[1::2]}'
 
 print(total)
 
