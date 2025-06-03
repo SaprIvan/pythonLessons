@@ -1,13 +1,13 @@
 numbers = [10, 2, 4, 5, 4, 3]
 
+min_index = numbers.index(min(numbers))  # 1 (число 2)
+max_index = numbers.index(max(numbers))  # 0 (число 10)
 
-min_index = numbers.index(min(numbers))
-max_index = numbers.index(max(numbers))
-mult = numbers[min_index]*numbers[max_index]
+numbers[min_index] = min(numbers) * max(numbers)  # numbers[1] = 2*10 = 20
+numbers[max_index] = min(numbers) * max(numbers)  # numbers[0] = 2*10 = 20
 
-numbers[min_index] = mult
-numbers[max_index] = mult
 numbers.sort()
+print(numbers)
 
 if __name__ == '__main__':
     # не обращайте на это внимание, это тесты
