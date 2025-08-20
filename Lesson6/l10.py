@@ -2,6 +2,7 @@ class Colors:
     __green = "\033[38;05;82m"
     __red = "\033[38;05;197m"
     __default = "\033[0m"
+    __yellow = "\033[38;05;208m"
 
     @classmethod
     def green(cls):
@@ -14,6 +15,10 @@ class Colors:
     @classmethod
     def default(cls):
         return cls.__default
+
+    @classmethod
+    def yellow(cls):
+        return cls.__yellow
 
 class HealthBar:
     __remaining_health_symbol = '█'
