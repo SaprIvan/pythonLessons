@@ -33,8 +33,8 @@ class Armor(BaseItem):
 
     def get_info(self):
         return (f'[{self.name}] {self.description}\n'
-                f'[Защита]: {Colors.yellow}{self.defence}{Colors.default}\n'
-                f'[Стоимость]: {Colors.yellow}{self.cost}{Colors.default}')
+                f'[Защита]: {Colors.yellow()}{self.defence}{Colors.default()}\n'
+                f'[Стоимость]: {Colors.yellow()}{self.cost}{Colors.default()}')
 
     def get_short_info(self):
         return f'[{name}] Защита: {defence}'
@@ -54,9 +54,9 @@ class Weapon(BaseItem):
 
     def get_info(self):
         return (f'[{name}]  {description}\n'
-            f'[Урон]: {Colors.yellow}{damage}{Colors.default}\n'
-            f'[Шанс попадания] {Colors.yellow}{hit_chance}%{Colors.default}\n'
-            f'[Стоимость]: {Colors.yellow}{cost}{Colors.default}')
+            f'[Урон]: {Colors.yellow()}{damage}{Colors.default()}\n'
+            f'[Шанс попадания] {Colors.yellow()}{hit_chance}%{Colors.default()}\n'
+            f'[Стоимость]: {Colors.yellow()}{cost}{Colors.default()}')
 
     def get_short_info(self):
         return f'[{name}] Урон: {damage} Шанс попадания: {hit_chance}%'
@@ -64,7 +64,7 @@ class Weapon(BaseItem):
 class Loot(BaseItem):
     def get_info(self):
         return (f'[{name}] {description}\n'
-         f'[Стоимость]: {Colors.yellow}{cost}{Colors.default}')
+         f'[Стоимость]: {Colors.yellow()}{cost}{Colors.default()}')
 
 class Inventory:
     def __init__(self):
@@ -73,6 +73,7 @@ class Inventory:
     @property
     def items(self):
         return self.__items
+
     def add_item(self, item):
         if isinstance(item, BaseItem):
             self.__items.append(item)
@@ -83,7 +84,7 @@ class Inventory:
         return item
 
     def items_count(self):
-        return len(self.__items) if self.__items else 0
+        return len(self.items) if self.__items else 0
 
     def draw_all_items(self):
         result = ""
@@ -94,25 +95,26 @@ class Inventory:
         total_cost = 0
         for item in self.__items:
             total_cost += item.cost
+        return total_cost
 
 if __name__ == '__main__':
     # не обращайте на это внимание, это тесты
     inventory = Inventory()
     assert hasattr(inventory, '_Inventory__items'), 'Атрибут __items у класса Inventory, должен быть приватным.'
     assert len(getattr(inventory, '_Inventory__items')) == 0, 'При создании экземпляра класса Inventory, список предметов должен быть пустым'
-    assert inventory.items_count == 0, \
+    assert inventory.items_count() == 0, \
         f'Свойство items_count у класса Inventory, при пустом списке __items, должен был вернуть 0, а вернул {inventory.items_count}'
 
     inventory.add_item('Item')
-    assert inventory.items_count == 0, f'Добавлять в инвентарь можно только предметы типа BaseItem'
+    assert inventory.items_count() == 0, f'Добавлять в инвентарь можно только предметы типа BaseItem'
 
     name, description = 'Легкий кожаный доспех', 'Сшитый из крыс кожанный доспех. Пахнет ужасно, но вроде бы защищает от урона.'
     cost, defence = 10, 2
     light_armor = Armor(name=name,cost=cost, description=description, defence=defence)
 
     expected_msg = (f'[{name}] {description}\n'
-                    f'[Защита]: {Colors.yellow}{defence}{Colors.default}\n'
-                    f'[Стоимость]: {Colors.yellow}{cost}{Colors.default}')
+                    f'[Защита]: {Colors.yellow()}{defence}{Colors.default()}\n'
+                    f'[Стоимость]: {Colors.yellow()}{cost}{Colors.default()}')
     assert light_armor.get_info() == expected_msg, \
         f'Проверьте корректность возвращаемой строки методом get_info у класса Armor. Ожидалось\n: {expected_msg}, а было\n{light_armor.get_info()}'
     expected_msg = f'[{name}] Защита: {defence}'
@@ -120,15 +122,15 @@ if __name__ == '__main__':
         f'Проверьте корректность возвращаемой строки методом get_short_info у класса Armor. Ожидалось\n: {expected_msg}, а было\n{light_armor.get_short_info()}'
 
     inventory.add_item(light_armor)
-    assert inventory.items_count == 1, \
+    assert inventory.items_count() == 1, \
         f'После добавления элемента в пустой инвентарь с помощью метода add_item, свойство items_count должно было вернуть 1, а вернуло {inventory.items_count}'
     name, description = 'Опасная дубина', 'Крепкая сосновая ветка с вбитым ржавым гвоздем на конце.'
     cost, damage, hit_chance = 4, 5, 75
     club = Weapon(name=name,cost=cost, description=description, damage=damage, hit_chance=hit_chance)
     expected_msg = (f'[{name}]  {description}\n'
-                    f'[Урон]: {Colors.yellow}{damage}{Colors.default}\n'
-                    f'[Шанс попадания] {Colors.yellow}{hit_chance}%{Colors.default}\n'
-                    f'[Стоимость]: {Colors.yellow}{cost}{Colors.default}')
+                    f'[Урон]: {Colors.yellow()}{damage}{Colors.default()}\n'
+                    f'[Шанс попадания] {Colors.yellow()}{hit_chance}%{Colors.default()}\n'
+                    f'[Стоимость]: {Colors.yellow()}{cost}{Colors.default()}')
     assert club.get_info() == expected_msg, \
         f'Проверьте корректность возвращаемой строки методом get_info у класса Weapon. Ожидалось\n: {expected_msg}, а было\n{club.get_info()}'
     expected_msg = f'[{name}] Урон: {damage} Шанс попадания: {hit_chance}%'
@@ -164,7 +166,7 @@ if __name__ == '__main__':
     cost = 3
     amulet = Loot(name=name, description=description, cost=cost)
     expected_msg = (f'[{name}] {description}\n'
-                    f'[Стоимость]: {Colors.yellow}{cost}{Colors.default}')
+                    f'[Стоимость]: {Colors.yellow()}{cost}{Colors.default()}')
     assert amulet.get_info() == expected_msg, \
         f'Проверьте корректность возвращаемой строки методом get_info у класса Loot. Ожидалось\n: {expected_msg}, а было\n{amulet.get_info()}'
 
