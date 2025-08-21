@@ -10,7 +10,7 @@ class BaseItem:
         return f"[{self.__name}][{self.__cost}] {self.__description}"
 
     def get_info(self):
-        return NotImplementedError(f"Метод get_info должен быть реализован у класса: {self.__class__.__name__}")
+        raise NotImplementedError(f"Метод get_info должен быть реализован у класса: {self.__class__}")
 
     @property
     def name(self):
@@ -37,7 +37,7 @@ class Armor(BaseItem):
                 f'[Стоимость]: {Colors.yellow()}{self.cost}{Colors.default()}')
 
     def get_short_info(self):
-        return f'[{name}] Защита: {defence}'
+        return f'[{self.name}] Защита: {self.defence}'
 
 class Weapon(BaseItem):
     def __init__(self, name, cost, description, damage, hit_chance):
@@ -53,18 +53,18 @@ class Weapon(BaseItem):
         return self.__hit_chance
 
     def get_info(self):
-        return (f'[{name}]  {description}\n'
-            f'[Урон]: {Colors.yellow()}{damage}{Colors.default()}\n'
-            f'[Шанс попадания] {Colors.yellow()}{hit_chance}%{Colors.default()}\n'
-            f'[Стоимость]: {Colors.yellow()}{cost}{Colors.default()}')
+        return (f'[{self.name}]  {self.description}\n'
+            f'[Урон]: {Colors.yellow()}{self.damage}{Colors.default()}\n'
+            f'[Шанс попадания] {Colors.yellow()}{self.hit_chance}%{Colors.default()}\n'
+            f'[Стоимость]: {Colors.yellow()}{self.cost}{Colors.default()}')
 
     def get_short_info(self):
-        return f'[{name}] Урон: {damage} Шанс попадания: {hit_chance}%'
+        return f'[{self.name}] Урон: {self.damage} Шанс попадания: {self.hit_chance}%'
 
 class Loot(BaseItem):
     def get_info(self):
-        return (f'[{name}] {description}\n'
-         f'[Стоимость]: {Colors.yellow()}{cost}{Colors.default()}')
+        return (f'[{self.name}] {self.description}\n'
+         f'[Стоимость]: {Colors.yellow()}{self.cost}{Colors.default()}')
 
 class Inventory:
     def __init__(self):
