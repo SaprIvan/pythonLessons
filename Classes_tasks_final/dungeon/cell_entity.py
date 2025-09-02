@@ -97,8 +97,12 @@ class Cell:
         if len(self.__neighbours) == 0:
             for _ in range(0,8):
                 self.__neighbours.append(None)
-        else:
             self.__neighbours[direction] = cell
+        if len(cell.neighbours) == 0:
+            for _ in range(0, 8):
+                cell.neighbours.append(None)
+            opp = Direction.opposite(direction)
+            cell.__neighbours[opp] = self
 
 
     def __repr__(self):
