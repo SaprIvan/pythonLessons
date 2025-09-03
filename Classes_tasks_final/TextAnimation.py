@@ -14,9 +14,8 @@ class TextAnimation:
         animation_events.Start(self.states, self.attempts, self.interval)
 
 class AnimationController:
-
     def __init__(self):
-       ### animation_events+=animation
+        animation_events.Start += self.animation
 
     def animation(self, states: list[any], attempts: int, interval: float):
         for attempt in range(attempts):
@@ -25,6 +24,7 @@ class AnimationController:
                 sleep(interval)
                 print("\r", end="")
         print("\r", end="")
+
 
 
 # Вспомогательные классы
