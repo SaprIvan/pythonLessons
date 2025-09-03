@@ -23,7 +23,7 @@ class AnimationController:
                 print(state, end="")
                 sleep(interval)
                 print("\r", end="")
-        print("\r", end="")
+        print(end="\n")
 
 
 
