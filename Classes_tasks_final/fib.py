@@ -6,12 +6,6 @@ def fib(count: int):
        prev = curr
        yield curr
 
-
-
-
-
-
-
 if __name__ == '__main__':
     # не обращайте на это внимание, это тесты
     count = 11
