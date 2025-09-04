@@ -10,3 +10,6 @@ from entities.player import Player
 
 
 # Место для реализации класса EntitiesLoader:
+class EntitiesLoader:
+    def __load_game_data(self):
+        pass
