@@ -33,7 +33,7 @@ class EntitiesLoader:
         return Player(armor, weapon, entity_data)
 
     def create_random_enemy(self):
-        rand_enemy = self.__game_data['enemies']['enemy_'+str(randint(1, 4))]
+        rand_enemy = choice(list(self.__game_data['enemies'].values()))
         armor = Armor(**rand_enemy['armor'])
         weapon = Weapon(**rand_enemy['weapon'])
         entity_data = EntityData(name = rand_enemy['name'],
@@ -43,5 +43,5 @@ class EntitiesLoader:
         return Enemy(armor, weapon, entity_data)
 
     def create_random_item(self):
-        rand_item = self.__game_data['items']['item_'+str(randint(1, 8))]
+        rand_item = choice(list(self.__game_data['items'].values()))
         return Loot(**rand_item)
